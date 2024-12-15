@@ -5,6 +5,12 @@ import React from 'react'
 
 import { makeClient } from '@plugins/apollo'
 
-export function ApolloWrapper({ children }: React.PropsWithChildren) {
+type Props = {
+  children: React.ReactNode
+}
+
+const ApolloWrapper = ({ children }: Readonly<Props>) => {
   return <ApolloNextAppProvider makeClient={makeClient}>{children}</ApolloNextAppProvider>
 }
+
+export default ApolloWrapper

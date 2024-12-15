@@ -9,12 +9,16 @@ import { create } from 'zustand'
 import { createJSONStorage, persist } from 'zustand/middleware'
 
 import { API } from '/#/api'
+
+const SCREEN_COOKIE_NAME = 'screen:state'
+
 export interface States {
   loggedIn: boolean
   token: string | null
   app: string | null
   profile: API.Profile | null
   setting: API.Setting | null
+  lockScreen: boolean
 }
 
 interface Actions {
@@ -23,6 +27,7 @@ interface Actions {
   getProfile: () => Promise<void>
   setApp: (app: string) => void
   getSetting: () => Promise<API.Setting>
+  toggleLockScreen: (status?: boolean) => void
 }
 
 export type Store = States & Actions
@@ -35,6 +40,7 @@ export const useStore = create<Store>()(
       app: 'gg',
       profile: null,
       setting: null,
+      lockScreen: false,
       login: async (token: string) => {
         Cookies.set('token', token, { path: '/' })
         set({ loggedIn: true, token })
@@ -42,7 +48,8 @@ export const useStore = create<Store>()(
       },
       logout: () => {
         Cookies.remove('token')
-        set({ loggedIn: false, token: null, profile: null })
+        set({ loggedIn: false, token: null, profile: null, lockScreen: false })
+        get().toggleLockScreen(false)
       },
       getProfile: async () => {
         const { data } = await makeClient().query({
@@ -65,7 +72,11 @@ export const useStore = create<Store>()(
 
         return get().setting as API.Setting
       },
-      setApp: (app: string) => set({ app })
+      setApp: (app: string) => set({ app }),
+      toggleLockScreen: (status: boolean = true) => {
+        document.cookie = `${SCREEN_COOKIE_NAME}=${status ? 'true' : 'false'}; path=/`
+        set({ lockScreen: status })
+      }
     }),
     {
       name: 'local-storage',
@@ -75,7 +86,8 @@ export const useStore = create<Store>()(
         token: state.token,
         app: state.app,
         profile: state.profile,
-        setting: state.setting
+        setting: state.setting,
+        lockScreen: state.lockScreen
       }),
       storage: createJSONStorage(() => localStorage)
     }

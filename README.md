@@ -23,3 +23,10 @@
 ###
 
 restarting my EsLint server in VsCode
+
+<https://ui.shadcn.com/docs>
+<https://ui.shadcn.com/docs/cli>
+
+### shadcn
+
+npx shadcn@latest add -a

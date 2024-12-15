@@ -1,4 +1,5 @@
-import { DropdownMenu, Flex, Spinner, Text } from '@radix-ui/themes'
+import * as DropdownMenuPrimitive from '@radix-ui/react-dropdown-menu'
+import { Flex, Spinner, Text } from '@radix-ui/themes'
 import { useMount } from 'ahooks'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -9,7 +10,16 @@ import { FiMenu } from 'react-icons/fi'
 import { IoClose, IoExitOutline } from 'react-icons/io5'
 import { RiDashboardLine } from 'react-icons/ri'
 
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger
+} from '@/components/ui/dropdown-menu'
 import { useStore } from '@/store'
+
+const DropdownMenuArrow = DropdownMenuPrimitive.Arrow
 
 const UriHeader = () => {
   const router = useRouter()
@@ -97,8 +107,8 @@ const UriHeader = () => {
                         <Text>加载中</Text>
                       </Flex>
                     ) : loggedIn ? (
-                      <DropdownMenu.Root>
-                        <DropdownMenu.Trigger>
+                      <DropdownMenu>
+                        <DropdownMenuTrigger asChild>
                           <div className='items-center justify-end mt-6 space-y-6 md:flex md:mt-0'>
                             <Flex
                               justify='center'
@@ -108,21 +118,20 @@ const UriHeader = () => {
                             >
                               <Text>{profile?.name}</Text>
                               <FaRegUser />
-                              <DropdownMenu.TriggerIcon />
                             </Flex>
                           </div>
-                        </DropdownMenu.Trigger>
-                        <DropdownMenu.Content>
-                          <DropdownMenu.Item onClick={() => router.push('/dashboard')}>
-                            <RiDashboardLine />
-                            控制面板
-                          </DropdownMenu.Item>
-                          <DropdownMenu.Separator />
-                          <DropdownMenu.Item onClick={logout}>
+                        </DropdownMenuTrigger>
+                        <DropdownMenuContent className='w-56'>
+                          <DropdownMenuArrow className='fill-gray-200' />
+                          <DropdownMenuItem onClick={() => router.push('/dashboard')}>
+                            <RiDashboardLine /> 控制面板
+                          </DropdownMenuItem>
+                          <DropdownMenuSeparator />
+                          <DropdownMenuItem onClick={logout}>
                             <IoExitOutline /> 退出登录
-                          </DropdownMenu.Item>
-                        </DropdownMenu.Content>
-                      </DropdownMenu.Root>
+                          </DropdownMenuItem>
+                        </DropdownMenuContent>
+                      </DropdownMenu>
                     ) : (
                       <Link href='/signin'>
                         <Flex

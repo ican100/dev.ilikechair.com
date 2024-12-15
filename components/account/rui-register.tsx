@@ -5,12 +5,13 @@ import { ServerError, useMutation } from '@apollo/client'
 import { ApolloError } from '@apollo/client/errors'
 import { Signatory } from '@cakioe/kit.js'
 import * as Form from '@radix-ui/react-form'
-import { Button, Flex, Heading, Text } from '@radix-ui/themes'
+import { Flex, Heading, Text } from '@radix-ui/themes'
 import { useCountDown, useUnmount } from 'ahooks'
 import { redirect } from 'next/navigation'
 import { FormEvent, useState } from 'react'
 import { toast } from 'react-toastify'
 
+import { Button } from '@/components/ui/button'
 import { useStore } from '@/store'
 
 import { appid } from '@config/index'
@@ -193,7 +194,7 @@ const RuiLogin = () => {
           {errors.security_code && <Form.Message className='text-red-600'>{errors.security_code}</Form.Message>}
         </Form.Field>
         <div className='pt-5'>
-          <Button loading={loading} size='3' color='blue' className='block w-full'>
+          <Button disabled={loading} className='block w-full'>
             登录 / 注册
           </Button>
         </div>

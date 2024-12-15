@@ -1,8 +1,8 @@
+import { cookies } from 'next/headers'
 import React from 'react'
 import { ToastContainer } from 'react-toastify'
 
-import { ApolloWrapper } from '@layouts/ApolloWrapper'
-import DefaultLayout from '@layouts/default'
+import { ApolloWrapper, DefaultLayout, Lockscreen } from '@/layouts'
 
 import '@assets/styles/app.scss'
 import '@assets/styles/globals.css'
@@ -18,12 +18,17 @@ type Props = {
 }
 
 export default function RootLayout({ children }: Readonly<Props>) {
+  const lockScreen = cookies().get('screen:state')?.value === 'true'
   return (
     <html lang='en' suppressHydrationWarning>
       <body className='font-sans'>
-        <ApolloWrapper>
-          <DefaultLayout>{children}</DefaultLayout>
-        </ApolloWrapper>
+        {lockScreen ? (
+          <Lockscreen />
+        ) : (
+          <ApolloWrapper>
+            <DefaultLayout>{children}</DefaultLayout>
+          </ApolloWrapper>
+        )}
         <ToastContainer position='top-center' autoClose={5000} hideProgressBar={false} draggable={false} />
       </body>
     </html>

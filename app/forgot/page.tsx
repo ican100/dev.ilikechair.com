@@ -5,12 +5,13 @@ import { ApolloError } from '@apollo/client/errors'
 import { Signatory } from '@cakioe/kit.js'
 import * as Form from '@radix-ui/react-form'
 import * as Separator from '@radix-ui/react-separator'
-import { Box, Button, Card, Container, Flex, Heading, Strong, Text } from '@radix-ui/themes'
+import { Box, Card, Container, Flex, Heading, Strong, Text } from '@radix-ui/themes'
 import { useCountDown, useUnmount } from 'ahooks'
 import Link from 'next/link'
 import { FormEvent, useState } from 'react'
 import { toast } from 'react-toastify'
 
+import { Button } from '@/components/ui/button'
 import { useStore } from '@/store'
 
 import { appid, version } from '@config/index'
@@ -264,7 +265,7 @@ const Page = () => {
                   )}
 
                   <div className='pt-5'>
-                    <Button loading={loading} size='3' color='blue' className='block w-full'>
+                    <Button disabled={loading} className='block w-full'>
                       提交
                     </Button>
                   </div>

@@ -5,12 +5,13 @@ import { ServerError, useMutation } from '@apollo/client'
 import { ApolloError } from '@apollo/client/errors'
 import { Signatory } from '@cakioe/kit.js'
 import * as Form from '@radix-ui/react-form'
-import { Button, Flex, Heading } from '@radix-ui/themes'
+import { Flex, Heading } from '@radix-ui/themes'
 import Link from 'next/link'
 import { redirect } from 'next/navigation'
 import { FormEvent, useState } from 'react'
 import { toast } from 'react-toastify'
 
+import { Button } from '@/components/ui/button'
 import { useStore } from '@/store'
 
 import { appid } from '@config/index'
@@ -146,12 +147,10 @@ const RuiRegister = ({ onReset }: Props) => {
         </Form.Field>
 
         <div className='grid grid-cols-2 gap-4 pt-5'>
-          <Button type='button' size='3' variant='outline' color='blue' onClick={() => onReset('sms')}>
+          <Button variant='outline' onClick={() => onReset('sms')}>
             注册
           </Button>
-          <Button loading={loading} size='3' color='blue'>
-            登录
-          </Button>
+          <Button disabled={loading}>登录</Button>
         </div>
       </Form.Root>
     </>
