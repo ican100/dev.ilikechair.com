@@ -1,7 +1,215 @@
-mutation Login($input: String!) {
-  login(payload: $input)
+# https://www.apollographql.com/docs/apollo-server/v3/data/file-uploads
+# type FileInput {
+#   file: Upload!
+# }
+scalar Upload
+
+type RoleInput {
+  name: String!
+  display_name:  String!
+  description:  String!
+  is_visible: Boolean!
+  sort_id: Int!
+}
+
+mutation CreateRole($input: RoleInput!) {
+  createRole(
+    input: $input
+  )
+}
+
+mutation UpdateRole($id: Int!, $input: RoleInput!) {
+  updateRole(id: $id, input: $input)
+}
+
+mutation DeleteRole($id: Int!) {
+  deleteRole(id: $id)
+}
+
+mutation UpdateRolePermissions($id: Int!, $input: [Int!]!) {
+  updateRolePermissions(id: $id, input: $input)
+}
+
+type RoleMenuObject {
+  selected_keys: [Int!]!
+  indeterminate_keys: [Int!]!
+}
+
+mutation UpdateRoleMenus($id: Int!, $input: RoleMenuObject!) {
+  updateRoleMenus(id: $id, input: $input)
+}
+
+type CoreInput {
+  name: String!
+  display_name: String!
+  description: String!
+  thumb: String!
+  is_visible: Boolean!
+  sort_id: Int!
+}
+
+mutation CreateCore($input: CoreInput!) {
+  createCore(
+    input: $input
+  )
+}
+
+mutation UpdateCore($id: Int!, $input: CoreInput!) {
+  updateCore(
+    id: $id
+    input: $input
+  )
+}
+
+mutation DeleteCore($id: Int!) {
+  deleteCore(id: $id)
+}
+
+type PermissionTypeInput {
+  name: String!
+  display_name: String!
+  sort_id: Int!
+}
+
+mutation CreatePermissionType($input: PermissionTypeInput!) {
+  createPermissionType(input: $input)
+}
+
+mutation UpdatePermissionType($id: Int!, $input: PermissionTypeInput!) {
+  updatePermissionType(id: $id, input: $input)
+}
+
+mutation DeletePermissionType($id: Int!) {
+  deletePermissionType(id: $id)
+}
+
+type AccountInput {
+  name: String!
+  app: String!
+  appid: String!
+  app_secret: String!
+  callback_url: String!
+  platform_type: Int!
+}
+
+mutation CreateAccount($input: AccountInput!) {
+  createAccount(input: $input)
+}
+
+mutation UpdateAccount($id: Int!, $input: AccountInput!) {
+  updateAccount(id: $id, input: $input)
+}
+
+mutation DeleteAccount($id: Int!) {
+  deleteAccount(id: $id)
+}
+
+type PermissionInput {
+  name: String!
+  display_name: String!
+  description: String!
+  is_visible: Boolean!
+  sort_id: Int!
+  type_id: Int!
+}
+
+mutation CreatePermission($input: PermissionInput!) {
+  createPermission(input: $input)
+}
+
+mutation UpdatePermission($id: Int!, $input: PermissionInput!) {
+  updatePermission(id: $id, input: $input)
+}
+
+mutation DeletePermission($id: Int!) {
+  deletePermission(id: $id)
+}
+
+type SettingInput {
+  title: String!
+  keywords: String!
+  description: String!
+  host: String!
+  folder: String!
+  file_group_id: Int!
+}
+
+mutation CreateSetting($input: SettingInput!) {
+  createSetting(input: $input)
+}
+
+mutation UpdateSetting($id: Int!, $input: SettingInput!) {
+  updateSetting(id: $id, input: $input)
+}
+
+mutation DeleteSetting($id: Int!) {
+  deleteSetting(id: $id)
+}
+type FileGroupInput {
+  group_name: String!
+  description: String!
+  parent_id: Int!
+  sort_id: Int!
+}
+
+mutation CreateFileGroup($input: FileGroupInput!) {
+  createFileGroup(input: $input)
+}
+
+mutation UpdateFileGroup($id: Int!, $input: FileGroupInput!) {
+  updateFileGroup(
+    id: $id
+    input: $input
+  )
+}
+
+mutation DeleteFileGroup($id: Int!) {
+  deleteFileGroup(id: $id)
+}
+
+mutation UpdateFile($file: Upload!) {
+  updateFile(file: $file)
+}
+
+mutation Code($input: String!) {
+  code(payload: $input)
+}
+
+type MenuInput {
+  name: String!
+  display_name: String!
+  path: String!
+  redirect: String!
+  component: String!
+  meta: MenuMeta!
+  parent_id: Int!
+  sort_id: Int!
+}
+
+mutation CreateMenu($input: MenuInput!) {
+  createMenu(input: $input)
+}
+
+mutation UpdateMenu($id: Int!, $input: MenuInput!) {
+  updateMenu(id: $id, input: $input)
+}
+
+mutation DeleteMenu($id: Int!) {
+  deleteMenu(id: $id)
 }
 
 mutation Signup($input: String!) {
   signup(payload: $input)
+}
+
+mutation ResetPassword($input: String!) {
+  resetPassword(payload: $input)
+}
+
+mutation ResetPassword($input: String!) {
+  resetPassword(payload: $input)
+}
+
+mutation Login($input: String!) {
+  login(payload: $input)
 }

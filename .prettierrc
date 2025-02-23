@@ -10,5 +10,6 @@
   "plugins": [],
   "importOrder": ["^@?\\w", "^[./]"],
   "importOrderSeparation": true,
-  "importOrderSortSpecifiers": true
+  "importOrderSortSpecifiers": true,
+  "endOfLine": "lf"
 }

@@ -1,16 +1,14 @@
 {
   "compilerOptions": {
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "target": "ES2021",
+    "module": "ESNext",
+    "lib": ["dom", "dom.iterable", "ES2021"],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
+    "noImplicitAny": true,
     "noEmit": true,
     "esModuleInterop": true,
-    "module": "esnext",
     "moduleResolution": "bundler",
     "resolveJsonModule": true,
     "isolatedModules": true,
@@ -22,28 +20,19 @@
         "name": "next"
       }
     ],
+    "typeRoots": ["./types"],
     "paths": {
-      "@/*": [
-        "./*"
-      ],
-      "@layouts/*": [
-        "./layouts/*"
-      ],
-      "@components/*": [
-        "./components/*"
-      ],
-      "@config/*": [
-        "./config/*"
-      ],
-      "@assets/*": [
-        "./assets/*"
-      ],
-      "@plugins/*": [
-        "./plugins/*"
-      ],
-      "@store/*": [
-        "./store/*"
-      ]
+      "@/*": ["./*"],
+      "@layouts/*": ["./layouts/*"],
+      "@components/*": ["./components/*"],
+      "@config/*": ["./config/*"],
+      "@assets/*": ["./assets/*"],
+      "@plugins/*": ["./plugins/*"],
+      "@store/*": ["./store/*"],
+      "@generated/*": ["./generated/*"],
+      "@enums/*": ["./enums/*"],
+      "@hooks/*": ["./hooks/*"],
+      "/#/*": ["types/*"]
     }
   },
   "include": [
@@ -55,9 +44,5 @@
     "codegen.ts",
     "next.config.mjs"
   ],
-  "exclude": [
-    "node_modules",
-    "target",
-    "src"
-  ]
+  "exclude": ["node_modules", "target", "src"]
 }

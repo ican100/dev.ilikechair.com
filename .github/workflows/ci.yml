@@ -67,7 +67,7 @@ jobs:
         with:
           flags: '-avzr'
           options: ''
-          src: '.next package.json pnpm-lock.yaml public .husky'
+          src: '.next package.json pnpm-lock.yaml public .husky middleware.ts'
           dest: 'root@${{ secrets.SSH_HOST }}:${{ secrets.ROOT_DIR }}/current'
 
       - name: Install dependencies and run on server

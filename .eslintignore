@@ -8,3 +8,9 @@
 src-tauri
 
 generated
+graphql
+
+.next
+.github
+
+components/ui
