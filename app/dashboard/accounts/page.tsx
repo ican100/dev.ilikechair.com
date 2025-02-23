@@ -1,24 +1,23 @@
 'use client'
-import { AccountDrawer } from '@/components/app/accounts'
-import { Button } from '@/components/ui/button'
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
 
 import { ServerError, useLazyQuery } from '@apollo/client'
 import { ApolloError } from '@apollo/client/errors'
+import { Flex, Spinner, Text } from '@radix-ui/themes'
 import { Plus } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
 
-import { AccountsDocument } from '@generated/graphql'
-
-import { Flex, Spinner, Text } from '@radix-ui/themes'
-
+import { AccountDrawer } from '@/components/app/accounts'
+import { Button } from '@/components/ui/button'
 import { Separator } from '@/components/ui/separator'
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table'
 
 import { API } from '/#/api'
 
 import { PermissionEnum } from '@/enums/permissionEnum'
 import { usePermission } from '@/hooks/user-permission'
+
+import { AccountsDocument } from '@generated/graphql'
 
 const Page = () => {
   const { hasPermission } = usePermission()

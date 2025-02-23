@@ -2,17 +2,23 @@
 
 import { Button } from '@/components/ui/button'
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog'
+
 import { ServerError, useMutation } from '@apollo/client'
 import { ApolloError } from '@apollo/client/errors'
+
 import type { TreeDataNode, TreeProps } from 'antd'
+
 import { Checkbox, Tree } from 'antd'
 import { toast } from 'react-toastify'
 
 import type { RoleMenuInput } from '@generated/graphql'
+
 import { UpdateRoleMenusDocument } from '@generated/graphql'
 
 import { useStore } from '@/store'
+
 import { useEffect, useState } from 'react'
+
 import { API } from '/#/api'
 
 type Props = {
@@ -82,7 +88,7 @@ const RoleDrawer = ({ menus, item, open, setOpen, refetch }: Props) => {
 
   const onSelectAll = (checked: boolean) => {
     if (checked) {
-      setCheckedKeys({ checked: getAllIds(menus as API.Menu[]), halfChecked: [] })
+      setCheckedKeys({ checked: getAllIds(menus), halfChecked: [] })
     } else {
       setCheckedKeys({ checked: [], halfChecked: [] })
     }

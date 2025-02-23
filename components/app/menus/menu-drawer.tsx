@@ -1,19 +1,26 @@
 'use client'
 
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
+import { ServerError, useMutation } from '@apollo/client'
+import { ApolloError } from '@apollo/client/errors'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { Divider } from 'antd'
+import Link from 'next/link'
+import { useEffect } from 'react'
+import { useForm } from 'react-hook-form'
 
 import { Button } from '@/components/ui/button'
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from '@/components/ui/dialog'
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form'
 import { Input } from '@/components/ui/input'
-import { ServerError, useMutation } from '@apollo/client'
-import { ApolloError } from '@apollo/client/errors'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { Divider } from 'antd'
-import { useEffect } from 'react'
-import { useForm } from 'react-hook-form'
+
 import { toast } from 'react-toastify'
 import { z } from 'zod'
+
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
+import { Switch } from '@/components/ui/switch'
+import { Textarea } from '@/components/ui/textarea'
+import { PermissionEnum } from '@/enums/permissionEnum'
+import { usePermission } from '@/hooks/user-permission'
 
 import {
   AlertDialog,
@@ -26,18 +33,11 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger
 } from '@components/ui/alert-dialog'
+import { CreateMenuDocument, DeleteMenuDocument, UpdateMenuDocument } from '@generated/graphql'
 
 import type { MenuInput } from '@generated/graphql'
 
-import { CreateMenuDocument, DeleteMenuDocument, UpdateMenuDocument } from '@generated/graphql'
-
 import { API } from '/#/api'
-
-import { Switch } from '@/components/ui/switch'
-import { Textarea } from '@/components/ui/textarea'
-import { PermissionEnum } from '@/enums/permissionEnum'
-import { usePermission } from '@/hooks/user-permission'
-import Link from 'next/link'
 
 const formSchema = z.object({
   id: z.number().int(),
