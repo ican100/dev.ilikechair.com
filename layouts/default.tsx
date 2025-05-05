@@ -1,8 +1,8 @@
 'use client'
 
 import { Theme } from '@radix-ui/themes'
-import { ThemeProvider } from 'next-themes'
 import { usePathname } from 'next/navigation'
+import { ThemeProvider } from 'next-themes'
 import React from 'react'
 
 import { useStore } from '@/store'
@@ -18,7 +18,7 @@ type Props = {
 const DefaultLayout = ({ children }: Readonly<Props>) => {
   const pathname = usePathname()
   // 是否显示 Header & Footer
-  const isVisible = !['/signin', '/forgot'].includes(pathname) && !pathname.startsWith('/dashboard')
+  const isVisible = !['/', '/signin', '/forgot'].includes(pathname) && !pathname.startsWith('/dashboard')
 
   const isLock = useStore(state => state.lockScreen)
   if (isLock) {

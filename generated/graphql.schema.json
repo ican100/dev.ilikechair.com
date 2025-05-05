@@ -1,10 +1,12 @@
 {
   "__schema": {
     "queryType": {
-      "name": "Query"
+      "name": "Query",
+      "kind": "OBJECT"
     },
     "mutationType": {
-      "name": "Mutation"
+      "name": "Mutation",
+      "kind": "OBJECT"
     },
     "subscriptionType": null,
     "types": [
@@ -211,6 +213,426 @@
               "name": null,
               "ofType": {
                 "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "BannerInput",
+        "description": null,
+        "isOneOf": false,
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "cover_image",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "expired_at",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "hit_count",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "is_link",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Boolean",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "is_video",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Boolean",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "is_visible",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Boolean",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "link_url",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "sort_id",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "status",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "title",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "video_url",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "view_type",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "views_count",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "BannerObject",
+        "description": null,
+        "isOneOf": null,
+        "fields": [
+          {
+            "name": "cover_image",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "expired_at",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "hit_count",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "id",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "is_link",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Boolean",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "is_video",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Boolean",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "is_visible",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Boolean",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "link_url",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "sort_id",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "status",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "title",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "video_url",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "view_type",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "views_count",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
                 "name": "Int",
                 "ofType": null
               }
@@ -237,49 +659,13 @@
       },
       {
         "kind": "INPUT_OBJECT",
-        "name": "CoreInput",
+        "name": "CategoryInput",
         "description": null,
         "isOneOf": false,
         "fields": null,
         "inputFields": [
           {
             "name": "description",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "display_name",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "is_visible",
-            "description": null,
-            "type": {
-              "kind": "SCALAR",
-              "name": "Boolean",
-              "ofType": null
-            },
-            "defaultValue": null,
-            "isDeprecated": false,
-            "deprecationReason": null
-          },
-          {
-            "name": "name",
             "description": null,
             "type": {
               "kind": "NON_NULL",
@@ -295,12 +681,76 @@
             "deprecationReason": null
           },
           {
-            "name": "sort_id",
+            "name": "is_visible",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Boolean",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "keywords",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "parent_id",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "slug",
             "description": null,
             "type": {
               "kind": "SCALAR",
-              "name": "Int",
+              "name": "String",
               "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "sort_id",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              }
             },
             "defaultValue": null,
             "isDeprecated": false,
@@ -317,6 +767,22 @@
             "defaultValue": null,
             "isDeprecated": false,
             "deprecationReason": null
+          },
+          {
+            "name": "title",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
           }
         ],
         "interfaces": null,
@@ -325,30 +791,42 @@
       },
       {
         "kind": "OBJECT",
-        "name": "CoreObject",
+        "name": "CategoryObject",
         "description": null,
         "isOneOf": null,
         "fields": [
           {
-            "name": "description",
+            "name": "children",
             "description": null,
             "args": [],
             "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
+              "kind": "LIST",
+              "name": null,
+              "ofType": {
+                "kind": "NON_NULL",
+                "name": null,
+                "ofType": {
+                  "kind": "OBJECT",
+                  "name": "CategoryObject",
+                  "ofType": null
+                }
+              }
             },
             "isDeprecated": false,
             "deprecationReason": null
           },
           {
-            "name": "display_name",
+            "name": "description",
             "description": null,
             "args": [],
             "type": {
-              "kind": "SCALAR",
-              "name": "String",
-              "ofType": null
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -386,7 +864,7 @@
             "deprecationReason": null
           },
           {
-            "name": "name",
+            "name": "keywords",
             "description": null,
             "args": [],
             "type": {
@@ -397,6 +875,34 @@
                 "name": "String",
                 "ofType": null
               }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "parent_id",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "slug",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "SCALAR",
+              "name": "String",
+              "ofType": null
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -425,6 +931,22 @@
               "kind": "SCALAR",
               "name": "String",
               "ofType": null
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "title",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
             },
             "isDeprecated": false,
             "deprecationReason": null
@@ -1193,8 +1715,8 @@
             "deprecationReason": null
           },
           {
-            "name": "createCore",
-            "description": "Creates a new core in the database.\n\nThis method constructs a `Core` object from the provided `CoreInput` and\nstores it in the database. If the operation succeeds, an \"ok\" string is returned.\nOtherwise, an error message is returned.\n\n# Arguments\n\n* `ctx` - The GraphQL context, used to access application state.\n* `input` - A `CoreInput` object containing the details of the core to be created.\n\n# Errors\n\nReturns an error if the core creation operation fails.",
+            "name": "createBanner",
+            "description": "Creates a new banner in the database.\n\nThis asynchronous function constructs a `Banner` object from the provided\n`BannerInput` and stores it in the database. All fields are initialized\nfrom the input, with optional fields defaulting to zero or `None` as applicable.\n\n# Arguments\n\n* `ctx` - The GraphQL context, used to access application state.\n* `input` - A `BannerInput` object containing the details of the banner to be created.\n\n# Returns\n\nA `Result` which is:\n* `Ok(String)` - A success message if the banner is created successfully.\n* `Err(Error)` - An error message if the banner creation fails.\n\n# Errors\n\nReturns an error if the banner creation operation fails due to database issues.",
             "args": [
               {
                 "name": "input",
@@ -1204,7 +1726,40 @@
                   "name": null,
                   "ofType": {
                     "kind": "INPUT_OBJECT",
-                    "name": "CoreInput",
+                    "name": "BannerInput",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "createCategory",
+            "description": "Creates a new category in the database.\n\nThis asynchronous function constructs a `Category` object from the provided\n`CategoryInput` and stores it in the database. All fields are initialized\nfrom the input, with optional fields defaulting to zero or `None` as applicable.\n\n# Arguments\n\n* `ctx` - The GraphQL context, used to access the application state.\n* `input` - A `CategoryInput` object containing the details of the category to be created.\n\n# Returns\n\nA `Result` which is:\n* `Ok(String)` - A success message if the category is created successfully.\n* `Err(Error)` - An error message if the category creation fails.\n\n# Errors\n\nReturns an error if the category creation operation fails due to database issues.",
+            "args": [
+              {
+                "name": "input",
+                "description": null,
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "CategoryInput",
                     "ofType": null
                   }
                 },
@@ -1457,8 +2012,41 @@
             "deprecationReason": null
           },
           {
-            "name": "deleteCore",
-            "description": "Deletes an existing core by its unique identifier.\n\nThis asynchronous method deletes a core from the database based\non the provided `id`. It first attempts to retrieve the core\nto ensure it exists before proceeding with the deletion process.\n\n# Arguments\n\n* `ctx` - The GraphQL context containing shared data, including the application state.\n* `id` - The unique identifier of the core to be deleted.\n\n# Returns\n\nReturns a `Result` containing a string with the value `\"ok\"` if the\ncore was deleted successfully, or an error if the operation fails.\n\n# Errors\n\nReturns an error if the core is not found or if there is a failure\nduring the deletion process.",
+            "name": "deleteBanner",
+            "description": "Deletes an existing banner by its unique identifier.\n\nThis asynchronous method deletes a banner from the database based\non the provided `id`. It first attempts to retrieve the banner\nto ensure it exists before proceeding with the deletion process.\n\n# Arguments\n\n* `ctx` - The GraphQL context containing shared data, including the application state.\n* `id` - The unique identifier of the banner to be deleted.\n\n# Returns\n\nReturns a `Result` containing a string with the value `\"ok\"` if the\nbanner was deleted successfully, or an error if the operation fails.\n\n# Errors\n\nReturns an error if the banner is not found or if there is a failure\nduring the deletion process.",
+            "args": [
+              {
+                "name": "id",
+                "description": null,
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "Int",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "deleteCategory",
+            "description": "Deletes an existing category by its unique identifier.\n\nThis asynchronous method deletes a category from the database based\non the provided `id`. It first attempts to retrieve the category\nto ensure it exists before proceeding with the deletion process.\n\n# Arguments\n\n* `ctx` - The GraphQL context containing shared data, including the application state.\n* `id` - The unique identifier of the category to be deleted.\n\n# Returns\n\nReturns a `Result` containing a string with the value `\"ok\"` if the\ncategory was deleted successfully, or an error if the operation fails.\n\n# Errors\n\nReturns an error if the category is not found or if there is a failure\nduring the deletion process.",
             "args": [
               {
                 "name": "id",
@@ -1689,10 +2277,10 @@
           },
           {
             "name": "login",
-            "description": null,
+            "description": "Logs in a user with the provided input.\n\nThis function decrypts the input payload and verifies its signature before proceeding\nwith the login process. The login method is determined by the `method` parameter, which\nsupports both password-based and Google OAuth login. If using password-based login, the\nuser's email and password are verified. For Google OAuth login, the user's information\nis retrieved using the provided code and app details. If the user does not exist, a new\nuser account and session are created.\n\nUpon successful login, a JWT token is generated and returned. A user log is also recorded\nwith client details such as IP address, city, and country.\n\n# Arguments\n\n* `ctx` - The GraphQL execution context, which includes shared application data.\n* `input` - A JSON string containing the encrypted login details.\n\n# Returns\n\nReturns a `Result` containing a JWT token as a `String` if the login is successful, or\nan error if the operation fails.\n\n# Errors\n\nReturns an error if the decryption or signature verification fails, if the user is not\nfound or the password is incorrect, or if there is an issue during the token generation\nor logging process.",
             "args": [
               {
-                "name": "payload",
+                "name": "input",
                 "description": null,
                 "type": {
                   "kind": "NON_NULL",
@@ -1721,11 +2309,11 @@
             "deprecationReason": null
           },
           {
-            "name": "resetPassword",
-            "description": null,
+            "name": "logout",
+            "description": "Logs out the current user from the system.\n\nThis method takes the GraphQL context and a dummy input parameter. It uses the context to\nobtain the current user and the application state, and then logs out the user by updating\nthe user's login log. The method returns a `Result` containing a string with the value `\"ok\"`\nif the logout is successful, or an error if the operation fails.\n\n# Arguments\n\n*   `ctx` - The execution context of the GraphQL query. This object contains information\nabout the current user and the database connection.\n*   `_input` - A dummy input parameter that is not used in the method.\n\n# Returns\n\nReturns a `Result` containing a string with the value `\"ok\"` if the logout is successful, or\nan error if the operation fails.\n\n# Errors\n\nIf the user is not found, or if there is a failure during the logout process, an error is\nreturned as a `Box<dyn std::error::Error>`.",
             "args": [
               {
-                "name": "payload",
+                "name": "input",
                 "description": null,
                 "type": {
                   "kind": "NON_NULL",
@@ -1754,11 +2342,11 @@
             "deprecationReason": null
           },
           {
-            "name": "signup",
-            "description": null,
+            "name": "signin",
+            "description": "Signs in a user with the provided input.\n\nThis method takes an encrypted JSON string containing the user's email and password,\ndecrypts it, verifies its signature, and checks if the user exists. If the user does\nnot exist, an error is returned. Otherwise, the user's session is updated and a JWT\ntoken is generated and returned.\n\n# Arguments\n\n* `ctx` - The execution context of the GraphQL query. This object contains information\nabout the current user and the database connection.\n* `input` - A JSON string containing the encrypted login details.\n\n# Returns\n\nReturns a `Result` containing a JWT token as a `String` if the signin is successful, or\nan error if the operation fails.\n\n# Errors\n\nReturns an error if the decryption or signature verification fails, if the user is not\nfound or the password is incorrect, or if there is an issue during the token generation\nor logging process.",
             "args": [
               {
-                "name": "payload",
+                "name": "input",
                 "description": null,
                 "type": {
                   "kind": "NON_NULL",
@@ -1836,8 +2424,8 @@
             "deprecationReason": null
           },
           {
-            "name": "updateCore",
-            "description": "Updates an existing core in the database.\n\nThis asynchronous function fetches the current core record by its `id` and updates\nits fields based on the values provided in the `input`. If a field in the `input` is `None`,\nthe function retains the current value from the existing record.\n\n# Arguments\n\n* `ctx` - The GraphQL context containing application data.\n* `id` - The unique identifier of the core to be updated.\n* `input` - A `CoreInput` object containing the updated core details.\n\n# Returns\n\nReturns a `Result` containing a string with the value `\"ok\"` if the core is updated\nsuccessfully, or an error if the operation fails.\n\n# Errors\n\nReturns an error if the core is not found, or if there is a failure during the update process.",
+            "name": "updateCategory",
+            "description": "Updates an existing banner in the database.\n\nThis asynchronous function fetches the current banner record by its `id` and updates\nits fields based on the values provided in the `input`. If a field in the `input` is `None`,\nthe function retains the current value from the existing record.\n\n# Arguments\n\n* `ctx` - The GraphQL context containing application data.\n* `id` - The unique identifier of the banner to be updated.\n* `input` - A `BannerInput` object containing the updated banner details.\n\n# Returns\n\nReturns a `Result` containing a string with the value `\"ok\"` if the banner is updated\nsuccessfully, or an error if the operation fails.\n\n# Errors\n\nReturns an error if the banner is not found, or if there is a failure during the update process.",
             "args": [
               {
                 "name": "id",
@@ -1863,7 +2451,7 @@
                   "name": null,
                   "ofType": {
                     "kind": "INPUT_OBJECT",
-                    "name": "CoreInput",
+                    "name": "BannerInput",
                     "ofType": null
                   }
                 },
@@ -2316,10 +2904,79 @@
             },
             "isDeprecated": false,
             "deprecationReason": null
+          },
+          {
+            "name": "updateUserRole",
+            "description": "Updates the role of an existing user in the database.\n\nThis asynchronous function fetches the user by its `user_id` and updates\nthe user's role based on the `role_id` provided in the `input`.\n\n# Arguments\n\n* `ctx` - The GraphQL context containing application data and state.\n* `input` - A `UserRoleInput` object containing the `user_id` and the new `role_id`.\n\n# Returns\n\nReturns a `Result` containing a string with the value `\"ok\"` if the user's role is updated\nsuccessfully, or an error if the operation fails.\n\n# Errors\n\nReturns an error if the user is not found, or if there is a failure during the role update process.",
+            "args": [
+              {
+                "name": "input",
+                "description": null,
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "INPUT_OBJECT",
+                    "name": "UserRoleInput",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "String",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
           }
         ],
         "inputFields": null,
         "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "PageInput",
+        "description": null,
+        "isOneOf": false,
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "current_page",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "per_page",
+            "description": null,
+            "type": {
+              "kind": "SCALAR",
+              "name": "Int",
+              "ofType": null
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
         "enumValues": null,
         "possibleTypes": null
       },
@@ -2762,6 +3419,47 @@
             "deprecationReason": null
           },
           {
+            "name": "banners",
+            "description": "Retrieves a list of all banners from the database.\n\nThis asynchronous function fetches all non-deleted banners, converts them\ninto `BannerObject` instances, sorts them by `sort_id` in ascending order,\nand returns them as a vector.\n\n# Arguments\n\n* `ctx` - The GraphQL context containing shared data, including the application state.\n* `_input` - A placeholder input string, not utilized in the current implementation.\n\n# Returns\n\nReturns a `Result` containing a vector of `BannerObject`s on success,\nor an `Error` if the operation fails.\n\n# Errors\n\nReturns an error if there is a failure in retrieving the list of banners from the database.",
+            "args": [
+              {
+                "name": "input",
+                "description": null,
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "String",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "OBJECT",
+                    "name": "BannerObject",
+                    "ofType": null
+                  }
+                }
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
             "name": "canIUse",
             "description": null,
             "args": [
@@ -2803,9 +3501,26 @@
             "deprecationReason": null
           },
           {
-            "name": "cores",
-            "description": "Retrieves a list of all cores from the database.\n\nThis method uses a loader to fetch the cores from the database. If the\ndatabase query fails, the method logs a warning and returns an empty\nvector of `CoreObject`s.\n\nThe returned list of `CoreObject`s is sorted by the `sort_id` field.",
-            "args": [],
+            "name": "categories",
+            "description": null,
+            "args": [
+              {
+                "name": "input",
+                "description": null,
+                "type": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "SCALAR",
+                    "name": "String",
+                    "ofType": null
+                  }
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
             "type": {
               "kind": "NON_NULL",
               "name": null,
@@ -2817,7 +3532,7 @@
                   "name": null,
                   "ofType": {
                     "kind": "OBJECT",
-                    "name": "CoreObject",
+                    "name": "CategoryObject",
                     "ofType": null
                   }
                 }
@@ -3013,6 +3728,35 @@
               "ofType": {
                 "kind": "OBJECT",
                 "name": "SettingObject",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "users",
+            "description": "Gets a list of users.\n\nThis method takes a `PageInput` structure as an optional argument and returns a vector of\n`UserObject` objects. The `PageInput` structure contains the page number and the page size.\nIf the `PageInput` argument is not provided, the method returns the first page of users with\na page size of 20.\n\nThe method returns an error if the user does not have permission to view the list of users.\n\n# Arguments\n\n*   `ctx` - The execution context of the GraphQL query. This object contains information\nabout the current user and the database connection.\n*   `input` - An optional `PageInput` structure containing the page number and the page size.\n\n# Errors\n\nReturns an error as a `Box<dyn std::error::Error>` if the database query fails or if the\nuser does not have permission to view the list of users.",
+            "args": [
+              {
+                "name": "input",
+                "description": null,
+                "type": {
+                  "kind": "INPUT_OBJECT",
+                  "name": "PageInput",
+                  "ofType": null
+                },
+                "defaultValue": null,
+                "isDeprecated": false,
+                "deprecationReason": null
+              }
+            ],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "OBJECT",
+                "name": "UserPage",
                 "ofType": null
               }
             },
@@ -3920,6 +4664,150 @@
         ],
         "inputFields": null,
         "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "OBJECT",
+        "name": "UserPage",
+        "description": "[Page Object](https://async-graphql.github.io/async-graphql/zh-CN/define_simple_object.html?highlight=ComplexObject#%E6%B3%9B%E5%9E%8B)",
+        "isOneOf": null,
+        "fields": [
+          {
+            "name": "currentPage",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "data",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "LIST",
+                "name": null,
+                "ofType": {
+                  "kind": "NON_NULL",
+                  "name": null,
+                  "ofType": {
+                    "kind": "OBJECT",
+                    "name": "UserObject",
+                    "ofType": null
+                  }
+                }
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "lastPage",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "perPage",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "total",
+            "description": null,
+            "args": [],
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              }
+            },
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "inputFields": null,
+        "interfaces": [],
+        "enumValues": null,
+        "possibleTypes": null
+      },
+      {
+        "kind": "INPUT_OBJECT",
+        "name": "UserRoleInput",
+        "description": null,
+        "isOneOf": false,
+        "fields": null,
+        "inputFields": [
+          {
+            "name": "role_id",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          },
+          {
+            "name": "user_id",
+            "description": null,
+            "type": {
+              "kind": "NON_NULL",
+              "name": null,
+              "ofType": {
+                "kind": "SCALAR",
+                "name": "Int",
+                "ofType": null
+              }
+            },
+            "defaultValue": null,
+            "isDeprecated": false,
+            "deprecationReason": null
+          }
+        ],
+        "interfaces": null,
         "enumValues": null,
         "possibleTypes": null
       },

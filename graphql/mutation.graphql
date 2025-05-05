@@ -39,32 +39,6 @@ mutation UpdateRoleMenus($id: Int!, $input: RoleMenuObject!) {
   updateRoleMenus(id: $id, input: $input)
 }
 
-type CoreInput {
-  name: String!
-  display_name: String!
-  description: String!
-  thumb: String!
-  is_visible: Boolean!
-  sort_id: Int!
-}
-
-mutation CreateCore($input: CoreInput!) {
-  createCore(
-    input: $input
-  )
-}
-
-mutation UpdateCore($id: Int!, $input: CoreInput!) {
-  updateCore(
-    id: $id
-    input: $input
-  )
-}
-
-mutation DeleteCore($id: Int!) {
-  deleteCore(id: $id)
-}
-
 type PermissionTypeInput {
   name: String!
   display_name: String!
@@ -198,18 +172,10 @@ mutation DeleteMenu($id: Int!) {
   deleteMenu(id: $id)
 }
 
-mutation Signup($input: String!) {
-  signup(payload: $input)
-}
-
-mutation ResetPassword($input: String!) {
-  resetPassword(payload: $input)
-}
-
-mutation ResetPassword($input: String!) {
-  resetPassword(payload: $input)
-}
-
 mutation Login($input: String!) {
-  login(payload: $input)
+  login(input: $input)
+}
+
+mutation Signin($input: String!) {
+    signin(input: $input)
 }

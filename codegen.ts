@@ -5,7 +5,7 @@ import type { CodegenConfig } from '@graphql-codegen/cli'
 const config: CodegenConfig = {
   schema: [
     {
-      'http://dev.local/graphql': {
+      'http://127.0.0.1:8090/graphql': {
         headers: {
           Appid: appid
         }

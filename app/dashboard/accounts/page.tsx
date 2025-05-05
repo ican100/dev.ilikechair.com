@@ -41,7 +41,7 @@ const Page = () => {
 
   const [platformTypes, setPlatformTypes] = useState<API.PlatformType[]>([])
   useEffect(() => {
-    setAccounts((data?.accounts as API.Account[]) ?? [])
+    setAccounts([])
     setPlatformTypes((data?.platformTypes as API.PlatformType[]) ?? [])
     setLoading(false)
   }, [data])

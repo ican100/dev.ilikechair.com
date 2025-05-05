@@ -19,7 +19,7 @@ import { Input } from '@/components/ui/input'
 import { useStore } from '@/store'
 
 import { appid, version } from '@config/index'
-import { CodeDocument, ResetPasswordDocument } from '@generated/graphql'
+import { CodeDocument, SigninDocument } from '@generated/graphql'
 
 const formSchema = z.object({
   email: z
@@ -102,7 +102,7 @@ const Page = () => {
   }
 
   // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
-  const [fetch, { loading, data }] = useMutation(ResetPasswordDocument, {
+  const [fetch, { loading, data }] = useMutation(SigninDocument, {
     variables: { input: '' },
     onError: ({ networkError }: ApolloError) => {
       const { result } = networkError as ServerError
@@ -116,7 +116,7 @@ const Page = () => {
     await fetch({ variables: { input: payload } })
   }
 
-  if (data && data.resetPassword) {
+  if (data && data.signin) {
     toast.success('密码重置成功')
     setSent(false)
   }

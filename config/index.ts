@@ -6,8 +6,8 @@ const tel = process.env.NEXT_PUBLIC_TEL || ''
 const graphqlUri = process.env.NEXT_PUBLIC_BASE_URL
 const loginURL = process.env.NEXT_PUBLIC_LOGIN_URI
 
-const company = '广州缘分平台信息科技有限公司'
+const company = 'Cakioe'
 
-const icp = '粤ICP备2020116257号'
+const icp = ''
 
 export { appid, company, email, graphqlUri, icp, isDev, loginURL, tel, version }

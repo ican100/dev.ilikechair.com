@@ -93,18 +93,6 @@ query Roles($input: String!) {
   }
 }
 
-query Cores {
-  cores {
-    id
-    name
-    display_name
-    description
-    thumb
-    is_visible
-    sort_id
-  }
-}
-
 query PermissionTypes {
   permissionTypes {
     id

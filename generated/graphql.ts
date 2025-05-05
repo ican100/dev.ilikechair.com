@@ -33,26 +33,64 @@ export type AccountObject = {
   callback_url?: Maybe<Scalars['String']['output']>;
   id: Scalars['Int']['output'];
   name: Scalars['String']['output'];
-  platform_type: Scalars['Int']['output'];
+  platform_type: Scalars['String']['output'];
 };
 
-export type CoreInput = {
-  description?: InputMaybe<Scalars['String']['input']>;
-  display_name?: InputMaybe<Scalars['String']['input']>;
-  is_visible?: InputMaybe<Scalars['Boolean']['input']>;
-  name: Scalars['String']['input'];
-  sort_id?: InputMaybe<Scalars['Int']['input']>;
+export type BannerInput = {
+  cover_image?: InputMaybe<Scalars['String']['input']>;
+  expired_at?: InputMaybe<Scalars['Int']['input']>;
+  hit_count: Scalars['Int']['input'];
+  is_link: Scalars['Boolean']['input'];
+  is_video: Scalars['Boolean']['input'];
+  is_visible: Scalars['Boolean']['input'];
+  link_url?: InputMaybe<Scalars['String']['input']>;
+  sort_id: Scalars['Int']['input'];
+  status: Scalars['Int']['input'];
+  title?: InputMaybe<Scalars['String']['input']>;
+  video_url?: InputMaybe<Scalars['String']['input']>;
+  view_type: Scalars['Int']['input'];
+  views_count: Scalars['Int']['input'];
+};
+
+export type BannerObject = {
+  cover_image?: Maybe<Scalars['String']['output']>;
+  expired_at?: Maybe<Scalars['Int']['output']>;
+  hit_count: Scalars['Int']['output'];
+  id: Scalars['Int']['output'];
+  is_link: Scalars['Boolean']['output'];
+  is_video: Scalars['Boolean']['output'];
+  is_visible: Scalars['Boolean']['output'];
+  link_url?: Maybe<Scalars['String']['output']>;
+  sort_id: Scalars['Int']['output'];
+  status: Scalars['Int']['output'];
+  title: Scalars['String']['output'];
+  video_url?: Maybe<Scalars['String']['output']>;
+  view_type: Scalars['Int']['output'];
+  views_count: Scalars['Int']['output'];
+};
+
+export type CategoryInput = {
+  description: Scalars['String']['input'];
+  is_visible: Scalars['Boolean']['input'];
+  keywords: Scalars['String']['input'];
+  parent_id: Scalars['Int']['input'];
+  slug?: InputMaybe<Scalars['String']['input']>;
+  sort_id: Scalars['Int']['input'];
   thumb?: InputMaybe<Scalars['String']['input']>;
+  title: Scalars['String']['input'];
 };
 
-export type CoreObject = {
-  description?: Maybe<Scalars['String']['output']>;
-  display_name?: Maybe<Scalars['String']['output']>;
+export type CategoryObject = {
+  children?: Maybe<Array<CategoryObject>>;
+  description: Scalars['String']['output'];
   id: Scalars['Int']['output'];
   is_visible: Scalars['Boolean']['output'];
-  name: Scalars['String']['output'];
+  keywords: Scalars['String']['output'];
+  parent_id: Scalars['Int']['output'];
+  slug?: Maybe<Scalars['String']['output']>;
   sort_id: Scalars['Int']['output'];
   thumb?: Maybe<Scalars['String']['output']>;
+  title: Scalars['String']['output'];
 };
 
 export type FileGroupInput = {
@@ -134,22 +172,51 @@ export type Mutation = {
    */
   createAccount: Scalars['String']['output'];
   /**
-   * Creates a new core in the database.
+   * Creates a new banner in the database.
    *
-   * This method constructs a `Core` object from the provided `CoreInput` and
-   * stores it in the database. If the operation succeeds, an "ok" string is returned.
-   * Otherwise, an error message is returned.
+   * This asynchronous function constructs a `Banner` object from the provided
+   * `BannerInput` and stores it in the database. All fields are initialized
+   * from the input, with optional fields defaulting to zero or `None` as applicable.
    *
    * # Arguments
    *
    * * `ctx` - The GraphQL context, used to access application state.
-   * * `input` - A `CoreInput` object containing the details of the core to be created.
+   * * `input` - A `BannerInput` object containing the details of the banner to be created.
+   *
+   * # Returns
+   *
+   * A `Result` which is:
+   * * `Ok(String)` - A success message if the banner is created successfully.
+   * * `Err(Error)` - An error message if the banner creation fails.
    *
    * # Errors
    *
-   * Returns an error if the core creation operation fails.
+   * Returns an error if the banner creation operation fails due to database issues.
    */
-  createCore: Scalars['String']['output'];
+  createBanner: Scalars['String']['output'];
+  /**
+   * Creates a new category in the database.
+   *
+   * This asynchronous function constructs a `Category` object from the provided
+   * `CategoryInput` and stores it in the database. All fields are initialized
+   * from the input, with optional fields defaulting to zero or `None` as applicable.
+   *
+   * # Arguments
+   *
+   * * `ctx` - The GraphQL context, used to access the application state.
+   * * `input` - A `CategoryInput` object containing the details of the category to be created.
+   *
+   * # Returns
+   *
+   * A `Result` which is:
+   * * `Ok(String)` - A success message if the category is created successfully.
+   * * `Err(Error)` - An error message if the category creation fails.
+   *
+   * # Errors
+   *
+   * Returns an error if the category creation operation fails due to database issues.
+   */
+  createCategory: Scalars['String']['output'];
   /**
    * Creates a new file group in the database.
    *
@@ -271,28 +338,51 @@ export type Mutation = {
    */
   deleteAccount: Scalars['String']['output'];
   /**
-   * Deletes an existing core by its unique identifier.
+   * Deletes an existing banner by its unique identifier.
    *
-   * This asynchronous method deletes a core from the database based
-   * on the provided `id`. It first attempts to retrieve the core
+   * This asynchronous method deletes a banner from the database based
+   * on the provided `id`. It first attempts to retrieve the banner
    * to ensure it exists before proceeding with the deletion process.
    *
    * # Arguments
    *
    * * `ctx` - The GraphQL context containing shared data, including the application state.
-   * * `id` - The unique identifier of the core to be deleted.
+   * * `id` - The unique identifier of the banner to be deleted.
    *
    * # Returns
    *
    * Returns a `Result` containing a string with the value `"ok"` if the
-   * core was deleted successfully, or an error if the operation fails.
+   * banner was deleted successfully, or an error if the operation fails.
    *
    * # Errors
    *
-   * Returns an error if the core is not found or if there is a failure
+   * Returns an error if the banner is not found or if there is a failure
    * during the deletion process.
    */
-  deleteCore: Scalars['String']['output'];
+  deleteBanner: Scalars['String']['output'];
+  /**
+   * Deletes an existing category by its unique identifier.
+   *
+   * This asynchronous method deletes a category from the database based
+   * on the provided `id`. It first attempts to retrieve the category
+   * to ensure it exists before proceeding with the deletion process.
+   *
+   * # Arguments
+   *
+   * * `ctx` - The GraphQL context containing shared data, including the application state.
+   * * `id` - The unique identifier of the category to be deleted.
+   *
+   * # Returns
+   *
+   * Returns a `Result` containing a string with the value `"ok"` if the
+   * category was deleted successfully, or an error if the operation fails.
+   *
+   * # Errors
+   *
+   * Returns an error if the category is not found or if there is a failure
+   * during the deletion process.
+   */
+  deleteCategory: Scalars['String']['output'];
   /**
    * Deletes an existing file group by its unique identifier.
    *
@@ -421,9 +511,87 @@ export type Mutation = {
    * in the database operation.
    */
   deleteSetting: Scalars['String']['output'];
+  /**
+   * Logs in a user with the provided input.
+   *
+   * This function decrypts the input payload and verifies its signature before proceeding
+   * with the login process. The login method is determined by the `method` parameter, which
+   * supports both password-based and Google OAuth login. If using password-based login, the
+   * user's email and password are verified. For Google OAuth login, the user's information
+   * is retrieved using the provided code and app details. If the user does not exist, a new
+   * user account and session are created.
+   *
+   * Upon successful login, a JWT token is generated and returned. A user log is also recorded
+   * with client details such as IP address, city, and country.
+   *
+   * # Arguments
+   *
+   * * `ctx` - The GraphQL execution context, which includes shared application data.
+   * * `input` - A JSON string containing the encrypted login details.
+   *
+   * # Returns
+   *
+   * Returns a `Result` containing a JWT token as a `String` if the login is successful, or
+   * an error if the operation fails.
+   *
+   * # Errors
+   *
+   * Returns an error if the decryption or signature verification fails, if the user is not
+   * found or the password is incorrect, or if there is an issue during the token generation
+   * or logging process.
+   */
   login: Scalars['String']['output'];
-  resetPassword: Scalars['String']['output'];
-  signup: Scalars['String']['output'];
+  /**
+   * Logs out the current user from the system.
+   *
+   * This method takes the GraphQL context and a dummy input parameter. It uses the context to
+   * obtain the current user and the application state, and then logs out the user by updating
+   * the user's login log. The method returns a `Result` containing a string with the value `"ok"`
+   * if the logout is successful, or an error if the operation fails.
+   *
+   * # Arguments
+   *
+   * *   `ctx` - The execution context of the GraphQL query. This object contains information
+   * about the current user and the database connection.
+   * *   `_input` - A dummy input parameter that is not used in the method.
+   *
+   * # Returns
+   *
+   * Returns a `Result` containing a string with the value `"ok"` if the logout is successful, or
+   * an error if the operation fails.
+   *
+   * # Errors
+   *
+   * If the user is not found, or if there is a failure during the logout process, an error is
+   * returned as a `Box<dyn std::error::Error>`.
+   */
+  logout: Scalars['String']['output'];
+  /**
+   * Signs in a user with the provided input.
+   *
+   * This method takes an encrypted JSON string containing the user's email and password,
+   * decrypts it, verifies its signature, and checks if the user exists. If the user does
+   * not exist, an error is returned. Otherwise, the user's session is updated and a JWT
+   * token is generated and returned.
+   *
+   * # Arguments
+   *
+   * * `ctx` - The execution context of the GraphQL query. This object contains information
+   * about the current user and the database connection.
+   * * `input` - A JSON string containing the encrypted login details.
+   *
+   * # Returns
+   *
+   * Returns a `Result` containing a JWT token as a `String` if the signin is successful, or
+   * an error if the operation fails.
+   *
+   * # Errors
+   *
+   * Returns an error if the decryption or signature verification fails, if the user is not
+   * found or the password is incorrect, or if there is an issue during the token generation
+   * or logging process.
+   */
+  signin: Scalars['String']['output'];
   /**
    * Updates an existing account with the given parameters.
    *
@@ -450,28 +618,28 @@ export type Mutation = {
    */
   updateAccount: Scalars['String']['output'];
   /**
-   * Updates an existing core in the database.
+   * Updates an existing banner in the database.
    *
-   * This asynchronous function fetches the current core record by its `id` and updates
+   * This asynchronous function fetches the current banner record by its `id` and updates
    * its fields based on the values provided in the `input`. If a field in the `input` is `None`,
    * the function retains the current value from the existing record.
    *
    * # Arguments
    *
    * * `ctx` - The GraphQL context containing application data.
-   * * `id` - The unique identifier of the core to be updated.
-   * * `input` - A `CoreInput` object containing the updated core details.
+   * * `id` - The unique identifier of the banner to be updated.
+   * * `input` - A `BannerInput` object containing the updated banner details.
    *
    * # Returns
    *
-   * Returns a `Result` containing a string with the value `"ok"` if the core is updated
+   * Returns a `Result` containing a string with the value `"ok"` if the banner is updated
    * successfully, or an error if the operation fails.
    *
    * # Errors
    *
-   * Returns an error if the core is not found, or if there is a failure during the update process.
+   * Returns an error if the banner is not found, or if there is a failure during the update process.
    */
-  updateCore: Scalars['String']['output'];
+  updateCategory: Scalars['String']['output'];
   updateFile: Scalars['String']['output'];
   /**
    * Updates an existing file group in the database.
@@ -636,6 +804,27 @@ export type Mutation = {
    * Returns an error if the setting is not found or if there is a failure during the update process.
    */
   updateSetting: Scalars['String']['output'];
+  /**
+   * Updates the role of an existing user in the database.
+   *
+   * This asynchronous function fetches the user by its `user_id` and updates
+   * the user's role based on the `role_id` provided in the `input`.
+   *
+   * # Arguments
+   *
+   * * `ctx` - The GraphQL context containing application data and state.
+   * * `input` - A `UserRoleInput` object containing the `user_id` and the new `role_id`.
+   *
+   * # Returns
+   *
+   * Returns a `Result` containing a string with the value `"ok"` if the user's role is updated
+   * successfully, or an error if the operation fails.
+   *
+   * # Errors
+   *
+   * Returns an error if the user is not found, or if there is a failure during the role update process.
+   */
+  updateUserRole: Scalars['String']['output'];
 };
 
 
@@ -649,8 +838,13 @@ export type MutationCreateAccountArgs = {
 };
 
 
-export type MutationCreateCoreArgs = {
-  input: CoreInput;
+export type MutationCreateBannerArgs = {
+  input: BannerInput;
+};
+
+
+export type MutationCreateCategoryArgs = {
+  input: CategoryInput;
 };
 
 
@@ -689,7 +883,12 @@ export type MutationDeleteAccountArgs = {
 };
 
 
-export type MutationDeleteCoreArgs = {
+export type MutationDeleteBannerArgs = {
+  id: Scalars['Int']['input'];
+};
+
+
+export type MutationDeleteCategoryArgs = {
   id: Scalars['Int']['input'];
 };
 
@@ -725,17 +924,17 @@ export type MutationDeleteSettingArgs = {
 
 
 export type MutationLoginArgs = {
-  payload: Scalars['String']['input'];
+  input: Scalars['String']['input'];
 };
 
 
-export type MutationResetPasswordArgs = {
-  payload: Scalars['String']['input'];
+export type MutationLogoutArgs = {
+  input: Scalars['String']['input'];
 };
 
 
-export type MutationSignupArgs = {
-  payload: Scalars['String']['input'];
+export type MutationSigninArgs = {
+  input: Scalars['String']['input'];
 };
 
 
@@ -745,9 +944,9 @@ export type MutationUpdateAccountArgs = {
 };
 
 
-export type MutationUpdateCoreArgs = {
+export type MutationUpdateCategoryArgs = {
   id: Scalars['Int']['input'];
-  input: CoreInput;
+  input: BannerInput;
 };
 
 
@@ -801,6 +1000,16 @@ export type MutationUpdateRolePermissionsArgs = {
 export type MutationUpdateSettingArgs = {
   id: Scalars['Int']['input'];
   input: SettingInput;
+};
+
+
+export type MutationUpdateUserRoleArgs = {
+  input: UserRoleInput;
+};
+
+export type PageInput = {
+  current_page?: InputMaybe<Scalars['Int']['input']>;
+  per_page?: InputMaybe<Scalars['Int']['input']>;
 };
 
 export type PermissionInput = {
@@ -861,17 +1070,30 @@ export type Query = {
    */
   accounts: Array<AccountObject>;
   auth: Scalars['Boolean']['output'];
-  canIUse: Array<Scalars['String']['output']>;
   /**
-   * Retrieves a list of all cores from the database.
+   * Retrieves a list of all banners from the database.
    *
-   * This method uses a loader to fetch the cores from the database. If the
-   * database query fails, the method logs a warning and returns an empty
-   * vector of `CoreObject`s.
+   * This asynchronous function fetches all non-deleted banners, converts them
+   * into `BannerObject` instances, sorts them by `sort_id` in ascending order,
+   * and returns them as a vector.
    *
-   * The returned list of `CoreObject`s is sorted by the `sort_id` field.
+   * # Arguments
+   *
+   * * `ctx` - The GraphQL context containing shared data, including the application state.
+   * * `_input` - A placeholder input string, not utilized in the current implementation.
+   *
+   * # Returns
+   *
+   * Returns a `Result` containing a vector of `BannerObject`s on success,
+   * or an `Error` if the operation fails.
+   *
+   * # Errors
+   *
+   * Returns an error if there is a failure in retrieving the list of banners from the database.
    */
-  cores: Array<CoreObject>;
+  banners: Array<BannerObject>;
+  canIUse: Array<Scalars['String']['output']>;
+  categories: Array<CategoryObject>;
   /**
    * Retrieves a list of all file groups from the database.
    *
@@ -958,6 +1180,33 @@ export type Query = {
    * or serializing/deserializing the setting data.
    */
   setting: SettingObject;
+  /**
+   * Gets a list of users.
+   *
+   * This method takes a `PageInput` structure as an optional argument and returns a vector of
+   * `UserObject` objects. The `PageInput` structure contains the page number and the page size.
+   * If the `PageInput` argument is not provided, the method returns the first page of users with
+   * a page size of 20.
+   *
+   * The method returns an error if the user does not have permission to view the list of users.
+   *
+   * # Arguments
+   *
+   * *   `ctx` - The execution context of the GraphQL query. This object contains information
+   * about the current user and the database connection.
+   * *   `input` - An optional `PageInput` structure containing the page number and the page size.
+   *
+   * # Errors
+   *
+   * Returns an error as a `Box<dyn std::error::Error>` if the database query fails or if the
+   * user does not have permission to view the list of users.
+   */
+  users: UserPage;
+};
+
+
+export type QueryBannersArgs = {
+  input: Scalars['String']['input'];
 };
 
 
@@ -966,8 +1215,18 @@ export type QueryCanIUseArgs = {
 };
 
 
+export type QueryCategoriesArgs = {
+  input: Scalars['String']['input'];
+};
+
+
 export type QueryMenusArgs = {
   input: Scalars['String']['input'];
+};
+
+
+export type QueryUsersArgs = {
+  input?: InputMaybe<PageInput>;
 };
 
 export type RoleInput = {
@@ -1047,6 +1306,20 @@ export type UserObject = {
   status: Scalars['Boolean']['output'];
 };
 
+/** [Page Object](https://async-graphql.github.io/async-graphql/zh-CN/define_simple_object.html?highlight=ComplexObject#%E6%B3%9B%E5%9E%8B) */
+export type UserPage = {
+  currentPage: Scalars['Int']['output'];
+  data: Array<UserObject>;
+  lastPage: Scalars['Int']['output'];
+  perPage: Scalars['Int']['output'];
+  total: Scalars['Int']['output'];
+};
+
+export type UserRoleInput = {
+  role_id: Scalars['Int']['input'];
+  user_id: Scalars['Int']['input'];
+};
+
 export type CreateRoleMutationVariables = Exact<{
   input: RoleInput;
 }>;
@@ -1084,28 +1357,6 @@ export type UpdateRoleMenusMutationVariables = Exact<{
 
 
 export type UpdateRoleMenusMutation = { updateRoleMenus: string };
-
-export type CreateCoreMutationVariables = Exact<{
-  input: CoreInput;
-}>;
-
-
-export type CreateCoreMutation = { createCore: string };
-
-export type UpdateCoreMutationVariables = Exact<{
-  id: Scalars['Int']['input'];
-  input: CoreInput;
-}>;
-
-
-export type UpdateCoreMutation = { updateCore: string };
-
-export type DeleteCoreMutationVariables = Exact<{
-  id: Scalars['Int']['input'];
-}>;
-
-
-export type DeleteCoreMutation = { deleteCore: string };
 
 export type CreatePermissionTypeMutationVariables = Exact<{
   input: PermissionTypeInput;
@@ -1253,20 +1504,6 @@ export type DeleteMenuMutationVariables = Exact<{
 
 export type DeleteMenuMutation = { deleteMenu: string };
 
-export type SignupMutationVariables = Exact<{
-  input: Scalars['String']['input'];
-}>;
-
-
-export type SignupMutation = { signup: string };
-
-export type ResetPasswordMutationVariables = Exact<{
-  input: Scalars['String']['input'];
-}>;
-
-
-export type ResetPasswordMutation = { resetPassword: string };
-
 export type LoginMutationVariables = Exact<{
   input: Scalars['String']['input'];
 }>;
@@ -1274,17 +1511,19 @@ export type LoginMutationVariables = Exact<{
 
 export type LoginMutation = { login: string };
 
+export type SigninMutationVariables = Exact<{
+  input: Scalars['String']['input'];
+}>;
+
+
+export type SigninMutation = { signin: string };
+
 export type RolesQueryVariables = Exact<{
   input: Scalars['String']['input'];
 }>;
 
 
 export type RolesQuery = { roles: Array<{ id: number, name: string, display_name?: string | null, description?: string | null, is_visible: boolean, sort_id: number, permission_ids?: Array<number> | null, menu_ids?: { selected_keys?: Array<number> | null, indeterminate_keys?: Array<number> | null } | null }>, permissionTypes: Array<{ id: number, name: string, display_name?: string | null, sort_id: number, permissions?: Array<{ id: number, name: string, display_name?: string | null, description?: string | null, is_visible: boolean, sort_id: number, type_id?: number | null }> | null }>, menus: Array<{ id: number, name: string, display_name: string, path?: string | null, component?: string | null, redirect?: string | null, parent_id: number, sort_id: number, meta?: { hidden: boolean, icon: string, title: string, affix: boolean, permissions: string, keep_alive: boolean } | null, children?: Array<{ id: number, name: string, display_name: string, path?: string | null, component?: string | null, redirect?: string | null, parent_id: number, sort_id: number, meta?: { hidden: boolean, icon: string, title: string, affix: boolean, permissions: string, keep_alive: boolean } | null, children?: Array<{ id: number, name: string, display_name: string, path?: string | null, component?: string | null, redirect?: string | null, parent_id: number, sort_id: number, meta?: { hidden: boolean, icon: string, title: string, affix: boolean, permissions: string, keep_alive: boolean } | null, children?: Array<{ id: number, name: string, display_name: string, path?: string | null, component?: string | null, redirect?: string | null, parent_id: number, sort_id: number }> | null }> | null }> | null }> };
-
-export type CoresQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type CoresQuery = { cores: Array<{ id: number, name: string, display_name?: string | null, description?: string | null, thumb?: string | null, is_visible: boolean, sort_id: number }> };
 
 export type PermissionTypesQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -1294,7 +1533,7 @@ export type PermissionTypesQuery = { permissionTypes: Array<{ id: number, name: 
 export type AccountsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type AccountsQuery = { accounts: Array<{ id: number, name: string, app: string, appid: string, app_secret?: string | null, callback_url?: string | null, platform_type: number }>, platformTypes: Array<{ id: number, name: string }> };
+export type AccountsQuery = { accounts: Array<{ id: number, name: string, app: string, appid: string, app_secret?: string | null, callback_url?: string | null, platform_type: string }>, platformTypes: Array<{ id: number, name: string }> };
 
 export type SettingQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -1336,9 +1575,6 @@ export const UpdateRoleDocument = {"kind":"Document","definitions":[{"kind":"Ope
 export const DeleteRoleDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"DeleteRole"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"deleteRole"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}]}]}}]} as unknown as DocumentNode<DeleteRoleMutation, DeleteRoleMutationVariables>;
 export const UpdateRolePermissionsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"UpdateRolePermissions"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"ListType","type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"updateRolePermissions"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}},{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}]}]}}]} as unknown as DocumentNode<UpdateRolePermissionsMutation, UpdateRolePermissionsMutationVariables>;
 export const UpdateRoleMenusDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"UpdateRoleMenus"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"RoleMenuObject"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"updateRoleMenus"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}},{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}]}]}}]} as unknown as DocumentNode<UpdateRoleMenusMutation, UpdateRoleMenusMutationVariables>;
-export const CreateCoreDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"CreateCore"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"CoreInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"createCore"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}]}]}}]} as unknown as DocumentNode<CreateCoreMutation, CreateCoreMutationVariables>;
-export const UpdateCoreDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"UpdateCore"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"CoreInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"updateCore"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}},{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}]}]}}]} as unknown as DocumentNode<UpdateCoreMutation, UpdateCoreMutationVariables>;
-export const DeleteCoreDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"DeleteCore"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"deleteCore"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}]}]}}]} as unknown as DocumentNode<DeleteCoreMutation, DeleteCoreMutationVariables>;
 export const CreatePermissionTypeDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"CreatePermissionType"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"PermissionTypeInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"createPermissionType"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}]}]}}]} as unknown as DocumentNode<CreatePermissionTypeMutation, CreatePermissionTypeMutationVariables>;
 export const UpdatePermissionTypeDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"UpdatePermissionType"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"PermissionTypeInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"updatePermissionType"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}},{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}]}]}}]} as unknown as DocumentNode<UpdatePermissionTypeMutation, UpdatePermissionTypeMutationVariables>;
 export const DeletePermissionTypeDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"DeletePermissionType"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"deletePermissionType"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}]}]}}]} as unknown as DocumentNode<DeletePermissionTypeMutation, DeletePermissionTypeMutationVariables>;
@@ -1359,11 +1595,9 @@ export const CodeDocument = {"kind":"Document","definitions":[{"kind":"Operation
 export const CreateMenuDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"CreateMenu"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"MenuInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"createMenu"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}]}]}}]} as unknown as DocumentNode<CreateMenuMutation, CreateMenuMutationVariables>;
 export const UpdateMenuDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"UpdateMenu"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}},{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"MenuInput"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"updateMenu"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}},{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}]}]}}]} as unknown as DocumentNode<UpdateMenuMutation, UpdateMenuMutationVariables>;
 export const DeleteMenuDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"DeleteMenu"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"id"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"Int"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"deleteMenu"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"id"},"value":{"kind":"Variable","name":{"kind":"Name","value":"id"}}}]}]}}]} as unknown as DocumentNode<DeleteMenuMutation, DeleteMenuMutationVariables>;
-export const SignupDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"Signup"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"signup"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"payload"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}]}]}}]} as unknown as DocumentNode<SignupMutation, SignupMutationVariables>;
-export const ResetPasswordDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"ResetPassword"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"resetPassword"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"payload"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}]}]}}]} as unknown as DocumentNode<ResetPasswordMutation, ResetPasswordMutationVariables>;
-export const LoginDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"Login"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"login"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"payload"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}]}]}}]} as unknown as DocumentNode<LoginMutation, LoginMutationVariables>;
+export const LoginDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"Login"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"login"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}]}]}}]} as unknown as DocumentNode<LoginMutation, LoginMutationVariables>;
+export const SigninDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"mutation","name":{"kind":"Name","value":"Signin"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"signin"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}]}]}}]} as unknown as DocumentNode<SigninMutation, SigninMutationVariables>;
 export const RolesDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"Roles"},"variableDefinitions":[{"kind":"VariableDefinition","variable":{"kind":"Variable","name":{"kind":"Name","value":"input"}},"type":{"kind":"NonNullType","type":{"kind":"NamedType","name":{"kind":"Name","value":"String"}}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"roles"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"display_name"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"is_visible"}},{"kind":"Field","name":{"kind":"Name","value":"sort_id"}},{"kind":"Field","name":{"kind":"Name","value":"permission_ids"}},{"kind":"Field","name":{"kind":"Name","value":"menu_ids"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"selected_keys"}},{"kind":"Field","name":{"kind":"Name","value":"indeterminate_keys"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"permissionTypes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"display_name"}},{"kind":"Field","name":{"kind":"Name","value":"sort_id"}},{"kind":"Field","name":{"kind":"Name","value":"permissions"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"display_name"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"is_visible"}},{"kind":"Field","name":{"kind":"Name","value":"sort_id"}},{"kind":"Field","name":{"kind":"Name","value":"type_id"}}]}}]}},{"kind":"Field","name":{"kind":"Name","value":"menus"},"arguments":[{"kind":"Argument","name":{"kind":"Name","value":"input"},"value":{"kind":"Variable","name":{"kind":"Name","value":"input"}}}],"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"display_name"}},{"kind":"Field","name":{"kind":"Name","value":"path"}},{"kind":"Field","name":{"kind":"Name","value":"component"}},{"kind":"Field","name":{"kind":"Name","value":"redirect"}},{"kind":"Field","name":{"kind":"Name","value":"parent_id"}},{"kind":"Field","name":{"kind":"Name","value":"sort_id"}},{"kind":"Field","name":{"kind":"Name","value":"meta"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"hidden"}},{"kind":"Field","name":{"kind":"Name","value":"icon"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"affix"}},{"kind":"Field","name":{"kind":"Name","value":"permissions"}},{"kind":"Field","name":{"kind":"Name","value":"keep_alive"}}]}},{"kind":"Field","name":{"kind":"Name","value":"children"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"display_name"}},{"kind":"Field","name":{"kind":"Name","value":"path"}},{"kind":"Field","name":{"kind":"Name","value":"component"}},{"kind":"Field","name":{"kind":"Name","value":"redirect"}},{"kind":"Field","name":{"kind":"Name","value":"parent_id"}},{"kind":"Field","name":{"kind":"Name","value":"sort_id"}},{"kind":"Field","name":{"kind":"Name","value":"meta"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"hidden"}},{"kind":"Field","name":{"kind":"Name","value":"icon"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"affix"}},{"kind":"Field","name":{"kind":"Name","value":"permissions"}},{"kind":"Field","name":{"kind":"Name","value":"keep_alive"}}]}},{"kind":"Field","name":{"kind":"Name","value":"children"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"display_name"}},{"kind":"Field","name":{"kind":"Name","value":"path"}},{"kind":"Field","name":{"kind":"Name","value":"component"}},{"kind":"Field","name":{"kind":"Name","value":"redirect"}},{"kind":"Field","name":{"kind":"Name","value":"parent_id"}},{"kind":"Field","name":{"kind":"Name","value":"sort_id"}},{"kind":"Field","name":{"kind":"Name","value":"meta"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"hidden"}},{"kind":"Field","name":{"kind":"Name","value":"icon"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"affix"}},{"kind":"Field","name":{"kind":"Name","value":"permissions"}},{"kind":"Field","name":{"kind":"Name","value":"keep_alive"}}]}},{"kind":"Field","name":{"kind":"Name","value":"children"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"display_name"}},{"kind":"Field","name":{"kind":"Name","value":"path"}},{"kind":"Field","name":{"kind":"Name","value":"component"}},{"kind":"Field","name":{"kind":"Name","value":"redirect"}},{"kind":"Field","name":{"kind":"Name","value":"parent_id"}},{"kind":"Field","name":{"kind":"Name","value":"sort_id"}}]}}]}}]}}]}}]}}]} as unknown as DocumentNode<RolesQuery, RolesQueryVariables>;
-export const CoresDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"Cores"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"cores"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"display_name"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"thumb"}},{"kind":"Field","name":{"kind":"Name","value":"is_visible"}},{"kind":"Field","name":{"kind":"Name","value":"sort_id"}}]}}]}}]} as unknown as DocumentNode<CoresQuery, CoresQueryVariables>;
 export const PermissionTypesDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"PermissionTypes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"permissionTypes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"display_name"}},{"kind":"Field","name":{"kind":"Name","value":"sort_id"}},{"kind":"Field","name":{"kind":"Name","value":"permissions"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"display_name"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"is_visible"}},{"kind":"Field","name":{"kind":"Name","value":"sort_id"}},{"kind":"Field","name":{"kind":"Name","value":"type_id"}}]}}]}}]}}]} as unknown as DocumentNode<PermissionTypesQuery, PermissionTypesQueryVariables>;
 export const AccountsDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"Accounts"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"accounts"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}},{"kind":"Field","name":{"kind":"Name","value":"app"}},{"kind":"Field","name":{"kind":"Name","value":"appid"}},{"kind":"Field","name":{"kind":"Name","value":"app_secret"}},{"kind":"Field","name":{"kind":"Name","value":"callback_url"}},{"kind":"Field","name":{"kind":"Name","value":"platform_type"}}]}},{"kind":"Field","name":{"kind":"Name","value":"platformTypes"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"name"}}]}}]}}]} as unknown as DocumentNode<AccountsQuery, AccountsQueryVariables>;
 export const SettingDocument = {"kind":"Document","definitions":[{"kind":"OperationDefinition","operation":"query","name":{"kind":"Name","value":"Setting"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"setting"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"title"}},{"kind":"Field","name":{"kind":"Name","value":"keywords"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"host"}},{"kind":"Field","name":{"kind":"Name","value":"folder"}},{"kind":"Field","name":{"kind":"Name","value":"file_group_id"}},{"kind":"Field","name":{"kind":"Name","value":"email_driver"}},{"kind":"Field","name":{"kind":"Name","value":"email_host"}},{"kind":"Field","name":{"kind":"Name","value":"email_port"}},{"kind":"Field","name":{"kind":"Name","value":"email_username"}},{"kind":"Field","name":{"kind":"Name","value":"email_password"}},{"kind":"Field","name":{"kind":"Name","value":"email_encryption"}},{"kind":"Field","name":{"kind":"Name","value":"email_from_address"}},{"kind":"Field","name":{"kind":"Name","value":"email_from_name"}},{"kind":"Field","name":{"kind":"Name","value":"registrable"}}]}},{"kind":"Field","name":{"kind":"Name","value":"fileGroups"},"selectionSet":{"kind":"SelectionSet","selections":[{"kind":"Field","name":{"kind":"Name","value":"id"}},{"kind":"Field","name":{"kind":"Name","value":"group_name"}},{"kind":"Field","name":{"kind":"Name","value":"description"}},{"kind":"Field","name":{"kind":"Name","value":"parent_id"}},{"kind":"Field","name":{"kind":"Name","value":"sort_id"}}]}}]}}]} as unknown as DocumentNode<SettingQuery, SettingQueryVariables>;

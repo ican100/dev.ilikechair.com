@@ -18,11 +18,7 @@ import { Input } from '@/components/ui/input'
 import { useStore } from '@/store'
 
 import { appid } from '@config/index'
-import { LoginDocument } from '@generated/graphql'
-
-type Props = {
-  onReset: (method: 'sms' | 'password') => void
-}
+import { SigninDocument } from '@generated/graphql'
 
 const formSchema = z.object({
   email: z
@@ -39,10 +35,10 @@ const formSchema = z.object({
   })
 })
 
-const RuiRegister = ({ onReset }: Props) => {
+const RuiRegister = () => {
   const app = useStore(state => state.app)
   const signer = new Signatory(appid)
-  const [fetch, { loading, data }] = useMutation(LoginDocument, {
+  const [fetch, { loading, data }] = useMutation(SigninDocument, {
     variables: { input: '' },
     onError: ({ networkError }: ApolloError) => {
       const { result } = networkError as ServerError
@@ -69,8 +65,8 @@ const RuiRegister = ({ onReset }: Props) => {
   const login = useStore(state => state.login)
   if (data) {
     toast.success('登录成功')
-    login(data.login)
-    // NOTE: 获取用户信息
+    login(data.signin)
+    // TODO: 获取用户信息
     return redirect('/')
   }
 
@@ -113,7 +109,7 @@ const RuiRegister = ({ onReset }: Props) => {
                       {...field}
                     />
                   </FormControl>
-                  <Link href='/forgot' className='flex-0 text-nowrap bg-transparent text-sm p-2 cursor-pointer'>
+                  <Link href='/forgot' className='flex-0 hidden text-nowrap bg-transparent text-sm p-2 cursor-pointer'>
                     忘记密码
                   </Link>
                 </Flex>
@@ -121,17 +117,7 @@ const RuiRegister = ({ onReset }: Props) => {
               </FormItem>
             )}
           />
-          <div className='grid grid-cols-2 gap-5 mt-5'>
-            <Button
-              size='lg'
-              disabled={loading}
-              type='button'
-              variant='outline'
-              className='w-full'
-              onClick={() => onReset('sms')}
-            >
-              注 册
-            </Button>
+          <div className='mt-5'>
             <Button size='lg' disabled={loading} type='submit' className='w-full'>
               登 录
             </Button>

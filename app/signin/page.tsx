@@ -8,13 +8,12 @@ import * as Separator from '@radix-ui/react-separator'
 import { Box, Card, Container, Flex, Heading, Text } from '@radix-ui/themes'
 import Link from 'next/link'
 import { redirect, useSearchParams } from 'next/navigation'
-import { useEffect, useState } from 'react'
-import { FaWeixin } from 'react-icons/fa'
+import { useEffect } from 'react'
 import { FcGoogle } from 'react-icons/fc'
 import { toast } from 'react-toastify'
 
-import { RuiLogin, RuiRegister, RuiWechat } from '@/components/account'
-import { appid, company, icp, version } from '@/config'
+import { RuiLogin } from '@/components/account'
+import { appid, company, version } from '@/config'
 import { useStore } from '@/store'
 
 import { LoginDocument } from '@generated/graphql'
@@ -30,8 +29,6 @@ const Page = () => {
     setApp(app)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [app])
-
-  const [method, setMethod] = useState<'sms' | 'password'>('sms')
 
   const signer = new Signatory(appid)
   const [fetch, { data }] = useMutation(LoginDocument, {
@@ -62,10 +59,6 @@ const Page = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [code])
 
-  const onReset = (method: 'sms' | 'password' = 'sms') => {
-    setMethod(method)
-  }
-
   // 已经登录的跳转回首页
   if (loggedIn) {
     return redirect('/')
@@ -81,9 +74,9 @@ const Page = () => {
   return (
     <>
       <Flex justify='between' className='h-screen w-screen flex-col bg-gray-50'>
-        <Flex className='invisible text-center'>TODO</Flex>
+        <Flex className='invisible text-center'>-</Flex>
         <Box>
-          <Container className='w-[90vw] mx-auto max-w-screen-sm rounded-md sm:w-11/12'>
+          <Container size='1' className='mx-auto max-w-screen-sm rounded-md sm:w-11/12'>
             <Card size='3' variant='ghost' className='shadow bg-white'>
               <Flex justify='between' align='center' className='mb-2.5 border-b pb-2.5'>
                 <Heading as='h2' className='text-lg text-gray-700 font-bold leading-none'>
@@ -94,8 +87,8 @@ const Page = () => {
                 </Link>
               </Flex>
               <Flex justify='between' align='start' className='pt-2.5 text-gray-600'>
-                <div className='flex-auto pr-4'>
-                  {method === 'sms' ? <RuiRegister /> : <RuiLogin onReset={onReset} />}
+                <div className='flex-auto'>
+                  <RuiLogin />
                   <Flex justify='between' align='center' className='pt-3 text-sm'>
                     <Flex align='center'>
                       <Text>其它登录：</Text>
@@ -109,29 +102,8 @@ const Page = () => {
                       >
                         <FcGoogle className='text-xl' />
                       </Link>
-                      <Link
-                        href='/auth/login?app=wechat&name=wechat'
-                        target='_self'
-                        rel='noreferrer nofollow'
-                        onClick={() => setApp('wechat')}
-                        prefetch={false}
-                      >
-                        <FaWeixin className='text-xl text-green-500' />
-                      </Link>
                     </Flex>
-                    {method === 'sms' ? (
-                      <Text className='cursor-pointer' onClick={() => onReset('password')}>
-                        密码登录
-                      </Text>
-                    ) : (
-                      <Text className='cursor-pointer' onClick={() => onReset('sms')}>
-                        验证码登录
-                      </Text>
-                    )}
                   </Flex>
-                </div>
-                <div className='flex-0 md:w-[250px] border-l px-4 text-sm'>
-                  <RuiWechat />
                 </div>
               </Flex>
               <div className='pt-6 text-center text-sm text-gray-600 space-x-0.5'>
@@ -148,15 +120,6 @@ const Page = () => {
           </Container>
         </Box>
         <Flex className='my-1 flex items-center justify-center text-sm text-gray-600'>
-          <Link
-            href='http://beian.miit.gov.cn/'
-            target='_blank'
-            rel='noreferrer nofollow'
-            className='mx-0.5 text-blue-500 underline hover:text-blue-700'
-          >
-            {icp}
-          </Link>
-          <Separator.Root decorative orientation='vertical' className='mx-2 h-4 w-0.5 bg-gray-200' />
           <Link href='/' className='mx-0.5'>
             &copy; 2024 All rights reserved. King Talent Powered by: {company}
           </Link>
